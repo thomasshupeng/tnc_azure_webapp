@@ -2,6 +2,15 @@ import http.client
 import urllib.request, urllib.parse, urllib.error
 import json
 import ssl
+import socket
+
+USING_HTTPS = True
+HOST_NAME = 'shpengD3'
+
+IPAddr = socket.gethostbyname(HOST_NAME)
+PORT_NUMBER = 5000
+if USING_HTTPS:
+    PORT_NUMBER = 443
 
 headers = {
     # Request headers
@@ -19,7 +28,10 @@ body = {"Url": "https://theartmad.com/wp-content/uploads/2015/02/Cute-Baby-Monke
 
 json_body = json.dumps(body)
 try:
-    conn = http.client.HTTPSConnection('127.0.0.1', port=5000, context=ssl._create_unverified_context())
+    if USING_HTTPS:
+        conn = http.client.HTTPSConnection(IPAddr, port=PORT_NUMBER, context=ssl._create_unverified_context())
+    else:
+        conn = http.client.HTTPConnection(IPAddr, port=PORT_NUMBER)
     conn.request("POST", "/tncapi/v1.0/Prediction/11111111/url?{!s}".format(params), json_body, headers)
     response = conn.getresponse()
     data = response.read()

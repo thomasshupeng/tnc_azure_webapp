@@ -11,7 +11,15 @@ Shu Peng
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
 import ssl
+import socket
 
+USING_HTTPS = True
+HOST_NAME = 'shpengD3'
+
+IPAddr = socket.gethostbyname(HOST_NAME)
+PORT_NUMBER = 5000
+if USING_HTTPS:
+    PORT_NUMBER = 443
 headers = {
     # Request headers
     'Content-Type': 'multipart/form-data',
@@ -28,11 +36,14 @@ test_file = "L-LJS17-EBF-0045.JPG"
 
 try:
     with open(test_file, 'rb') as f:
-        conn = http.client.HTTPSConnection('127.0.0.1', port=5000, context=ssl._create_unverified_context())
+        if USING_HTTPS:
+            conn = http.client.HTTPSConnection(IPAddr, port=PORT_NUMBER, context=ssl._create_unverified_context())
+        else:
+            conn = http.client.HTTPConnection(IPAddr, port=PORT_NUMBER)
+
         conn.request("POST", "/tncapi/v1.0/Prediction/11111111/image?{!s}".format(params), body=f.read(), headers=headers)
         response = conn.getresponse()
         data = response.read()
-        print(data)
         json_response = json.loads(data)
         predictions = json_response.get('Predictions')
         if len(predictions) >= 1:
