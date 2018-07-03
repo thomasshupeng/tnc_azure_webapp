@@ -1,4 +1,5 @@
 import os
+os.environ['PATH'] = r'D:\home\python364x64;' + os.environ['PATH']    
 from cntk import load_model
 from cntk.ops import softmax
 import pandas as pd
