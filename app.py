@@ -226,7 +226,16 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
+    HOST = os.environ.get('SERVER_HOST', 'localhost')
+    try:
+        PORT = int(os.environ.get('SERVER_PORT', '5555'))
+    except ValueError:
+        PORT = 5555
+    app.run(HOST, PORT)
+
+'''
     if USING_HTTPS:
         app.run(host=HOST_NAME,port=PORT_NUMBER, ssl_context='adhoc')
     else:
         app.run(host=HOST_NAME, port=PORT_NUMBER)
+'''
