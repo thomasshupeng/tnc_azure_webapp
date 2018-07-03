@@ -64,7 +64,9 @@ if os.path.exists(temp_folder):
     os.makedirs(temp_folder)
 
 loader = TNC_ModelLoader.ModelLoader()
-model = loader.get_model(MODEL_NAME)
+# TODO: should load and initialize all models.
+# here we just load one model for demo
+loader.get_model(MODEL_NAME)
 
 app = Flask(__name__)
 app.config["DEBUG"] = DEBUG_MODE
@@ -106,6 +108,12 @@ def post_prediction_img_url():
     img_url = request.json.get('Url')
     print("Url = {!s}".format(img_url))
 
+    # TODO: Get model according to Prediction-key
+    # for demo purpose, we load hard-coded model now
+    model = loader.get_model(MODEL_NAME)
+    if model is None:
+        return jsonify({"Error": "Failed to load model", "Model": MODEL_NAME})
+
     # Download image file from given Url, if failed to downloading the image simply return error code
     # TODO: check if the file is really an image file before downloading
     if not os.path.exists(temp_folder):
@@ -119,11 +127,10 @@ def post_prediction_img_url():
         with open(img_path_file, 'wb') as f:
             f.write(r.content)
     else:
-        return jsonify({"Url": img_url, "Code": r.status_code, "Error": r.reason})
+        return jsonify({"Error": r.reason, "Url": img_url, "Code": r.status_code})
 
     if not os.path.exists(img_path_file):
-        res_error = {"Url": img_url, "Error": "Can not open image file."}
-        return jsonify(res_error)
+        return jsonify({"Error": "Couldn't open the image file", "File": img_path_file})
 
     predictions = model.predict(img_path_file)
     os.remove(img_path_file)
@@ -179,6 +186,16 @@ def post_prediction_image():
     temp_file.close()
 
     print("Image is saved as {!s}".format(img_path_file))
+
+    # TODO: Get model according to Prediction-key
+    # for demo purpose, we load hard-coded model now
+    model = loader.get_model(MODEL_NAME)
+    if model is None:
+        return jsonify({"Error": "Failed to load model", "Model": MODEL_NAME})
+
+    if not os.path.exists(img_path_file):
+        return jsonify({"Error": "Couldn't open the image file", "File": img_path_file})
+
     predictions = model.predict(img_path_file)
     os.remove(img_path_file)
     print("Image file {!s} is removed.".format(img_path_file))
