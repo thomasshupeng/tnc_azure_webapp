@@ -14,7 +14,7 @@ _num_channels = 3
 
 class ModelLoader:
     def __init__(self):
-        self.model_list = {'21C': None, '3C': None}
+        self.model_list = {'21CResNet18': None, '3CResNet18': None}
         model = Model()
         self.model_list['DummyTest'] = model
         return
@@ -45,7 +45,7 @@ class Model:
 
     def predict(self, image_path):
         print(" Dummy test predict()")
-        return []
+        return [{"TagId": '99', "Tag": "Others", "Probability": 1.0}]
 
 
 class CntkModel(Model):
@@ -66,9 +66,9 @@ class CntkModel(Model):
             print("Error: couldn't load look-up file - ", self.lookup_file)
             return None
 
-        print(self.lookup_df.columns)
-
-        self.trained_model = load_model(self.model_file)
+        self.trained_model = None
+        if os.path.exists(self.model_file):
+            self.trained_model = load_model(self.model_file)
         if self.trained_model is None:
             print("Error: couldn't load pre-trained model - ", self.model_file)
             return None
