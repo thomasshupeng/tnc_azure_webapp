@@ -75,7 +75,7 @@ echo "Installing requirements"
 :: This PATH should direct to CNTK directory
 set CNTK_PATH=%PYTHON_DIR%\Lib\site-packages\cntk
 set PATH=%PYTHON_DIR%;%CNTK_PATH%;%PATH%
-::echo PATH set to %PYTHON_DIR%
+echo PATH set to %PATH%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :postPython

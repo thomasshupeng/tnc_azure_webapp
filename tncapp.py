@@ -24,7 +24,7 @@ https://southcentralus.dev.cognitive.microsoft.com/docs/services/57982f59b5964e3
 
 from flask import Flask, jsonify, request
 import os
-os.environ['PATH'] = r'D:\home\python364x64;' + os.environ['PATH']    
+os.environ['PATH'] = r'D:\home\python364x64;D:\home\python364x64\Lib\site-packages\cntk;' + os.environ['PATH']    
 import requests
 import datetime
 import shutil
