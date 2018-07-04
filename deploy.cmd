@@ -66,6 +66,8 @@ pushd "%DEPLOYMENT_TARGET%"
 ::curl https://bootstrap.pypa.io/get-pip.py | %PYTHON_EXE%
 :: 4. Install packages
 echo Pip install requirements.
+echo "Upgrade pip"
+%PYTHON_EXE% -m pip install --upgrade pip
 echo "Installing requirements"
 %PYTHON_EXE% -m pip install -r requirements.txt
 :: This PATH should direct to CNTK directory
