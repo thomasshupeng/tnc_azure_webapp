@@ -212,6 +212,7 @@ def post_prediction_image():
 
 @app.route('/', methods=['GET','POST'])
 def get_root():
+    print("==== root ====")
     msg = "<h1>Welcome to TNC wildlife RESTful API</h1>"
     msg = msg + "<p>Service started from: " + service_start_time + "</p>"
     msg = msg + "<p>PredictImageUrl POST to: " + full_predict_image_url_endpoint + "</p>"
