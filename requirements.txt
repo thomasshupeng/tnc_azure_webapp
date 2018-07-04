@@ -6,11 +6,16 @@ click==6.7
 https://cntk.ai/PythonWheel/CPU-Only/cntk-2.5.1-cp36-cp36m-win_amd64.whl
 cryptography==2.2.2
 Flask==1.0.2
+icc-rt==2018.0.3
 idna==2.7
+intel-openmp==2018.0.3
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
+mkl==2018.0.3
+mkl-fft==1.0.2
 mkl-random==1.0.1
+numpy==1.14.5
 olefile==0.45.1
 pandas==0.23.1
 Pillow==5.1.0
@@ -25,5 +30,6 @@ six==1.11.0
 urllib3==1.23
 waitress==1.1.0
 Werkzeug==0.14.1
+wfastcgi==3.0.0
 win-inet-pton==1.0.1
 wincertstore==0.2
