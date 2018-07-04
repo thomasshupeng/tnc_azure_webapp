@@ -68,12 +68,13 @@ pushd "%DEPLOYMENT_TARGET%"
 echo Pip install requirements.
 echo "Upgrading pip"
 %PYTHON_EXE% -m pip install --upgrade pip
-echo "Uninstalling few packages"
-%PYTHON_EXE% -m pip uninstall -y -r uninstalls.txt
+::echo "Uninstalling few packages"
+::%PYTHON_EXE% -m pip uninstall -y -r uninstalls.txt
 echo "Installing requirements"
 %PYTHON_EXE% -m pip install -r requirements.txt
 :: This PATH should direct to CNTK directory
-::set PATH=%PYTHON_DIR%;%PATH%
+set CNTK_PATH=%PYTHON_DIR%\Lib\site-packages\cntk
+set PATH=%PYTHON_DIR%;%CNTK_PATH%;%PATH%
 ::echo PATH set to %PYTHON_DIR%
 IF !ERRORLEVEL! NEQ 0 goto error
 
