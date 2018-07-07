@@ -1,4 +1,4 @@
-'''
+"""
 File Name: TNC_RestSvc.py
 v 1.0
 
@@ -6,25 +6,11 @@ This program provides the RESTful API for TNC project
 
 6/30/2018
 Shu Peng
-
-This program implement folllowing API
-
-1.	PredictImageUrl
-https://southcentralus.dev.cognitive.microsoft.com/docs/services/57982f59b5964e36841e22dfbfe78fc1/operations/5a3044f608fa5e06b890f163
-                
-This one is predicting image by a given a url, which is very similar to what you have with some changes:
-a.	Instead pass pic URL as url parameter, it passes URL in http body, which doesn’t need any encoding.  
-b.	We can make projectid, iterationid, applicationid all as optional, those id can be useful for different 
-projects(云南老君山，北大生命科学院， etc.)
-
-2.	PredictImage
-https://southcentralus.dev.cognitive.microsoft.com/docs/services/57982f59b5964e36841e22dfbfe78fc1/operations/5a3044f608fa5e06b890f164
-
-'''
+"""
 
 from flask import Flask, jsonify, request
 import os
-os.environ['PATH'] = r'D:\home\python364x64;D:\home\python364x64\Lib\site-packages\cntk;' + os.environ['PATH']    
+# os.environ['PATH'] = r'D:\home\python364x64;D:\home\python364x64\Lib\site-packages\cntk;' + os.environ['PATH']    
 import requests
 import datetime
 import shutil
@@ -47,9 +33,7 @@ if USING_HTTPS:
     PORT_NUMBER = 443
 
 
-project_name_to_id = {'TNC': '11111111',
-                      '云南老君山': '22222222',
-                      '北大生命科学院': '33333333'}
+project_name_to_id = {'TNC': '11111111', 'Yun Nan': '22222222', 'BU': '33333333'}
 
 SERVICE_NAME = 'tncapi'
 API_VERSION = 'v1.0'

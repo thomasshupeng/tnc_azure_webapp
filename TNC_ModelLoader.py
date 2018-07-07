@@ -1,5 +1,5 @@
 import os
-os.environ['PATH'] = r'D:\home\python364x64;D:\home\python364x64\Lib\site-packages\cntk;' + os.environ['PATH']    
+#os.environ['PATH'] = r'D:\home\python364x64;D:\home\python364x64\Lib\site-packages\cntk;' + os.environ['PATH']    
 from cntk import load_model
 from cntk.ops import softmax
 import pandas as pd
