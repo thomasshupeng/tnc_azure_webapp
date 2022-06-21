@@ -12,7 +12,7 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 mkl==2018.0.3
-numpy==1.14.5
+numpy==1.22.0
 olefile==0.45.1
 pandas==0.23.1
 Pillow==5.1.0
